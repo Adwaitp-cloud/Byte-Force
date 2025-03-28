@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventSphere | Modern Event Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="animated-bg"></div>
+    
+    <!-- Loading Animation -->
+    <div class="loader">
+        <div class="loader-logo animate__animated animate__pulse animate__infinite">
+            <i class="fas fa-calendar-star"></i>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo animate__animated animate__fadeInLeft">
+            <i class="fas fa-calendar-star"></i>
+            <span>EventSphere</span>
+        </div>
+        <ul class="nav-links animate__animated animate__fadeInRight">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#events">Events</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#register">Register</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="animate__animated animate__fadeInDown">Revolutionizing <span>Event Registration</span></h1>
+            <p class="animate__animated animate__fadeInUp">Seamless online registration with instant confirmation, digital tickets, and smart reminders.</p>
+            <a href="#register" class="btn animate__animated animate__fadeInUp animate__delay-1s">Register Now <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="hero-image animate__animated animate__fadeInRight">
+            <div class="isometric-event"></div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="events">
+        <h2 class="section-title">Upcoming Events</h2>
+        <div class="events-grid">
+            <!-- Event cards will be populated by JavaScript -->
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <h2 class="section-title">Our Amazing Features</h2>
+        <div class="features-container">
+            <div class="feature-card animate__animated">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Instant Confirmation</h3>
+                <p>Get immediate confirmation with digital tickets sent to your email.</p>
+                <div class="wave-effect"></div>
+            </div>
+            <div class="feature-card animate__animated">
+                <div class="feature-icon">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <h3>QR Code Tickets</h3>
+                <p>Easy check-in with scannable QR codes on your mobile device.</p>
+                <div class="wave-effect"></div>
+            </div>
+            <div class="feature-card animate__animated">
+                <div class="feature-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <h3>Smart Reminders</h3>
+                <p>Never miss an event with automated email and SMS reminders.</p>
+                <div class="wave-effect"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section id="register" class="registration">
+        <div class="registration-container">
+            <div class="registration-image animate__animated animate__fadeInLeft">
+                <div class="isometric-form"></div>
+            </div>
+            <div class="registration-form animate__animated animate__fadeInRight">
+                <h2>Register for an Event</h2>
+                <form id="eventForm" action="register.php" method="POST">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="event">Select Event</label>
+                        <select id="event" name="event" required>
+                            <option value="">-- Select an Event --</option>
+                            <!-- Options will be populated by JavaScript -->
+                        </select>
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="form-group">
+                        <label for="tickets">Number of Tickets</label>
+                        <input type="number" id="tickets" name="tickets" min="1" max="10" value="1" required>
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <button type="submit" class="btn">Complete Registration <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ticket Preview Modal -->
+    <div id="ticketModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Your Event Ticket</h2>
+            <div class="ticket-preview">
+                <div class="ticket-header">
+                    <div class="ticket-logo">
+                        <i class="fas fa-calendar-star"></i>
+                    </div>
+                    <div class="ticket-event-info">
+                        <h3 id="ticketEventName">Event Name</h3>
+                        <p id="ticketEventDate">Date: Loading...</p>
+                        <p id="ticketEventLocation">Location: Loading...</p>
+                    </div>
+                </div>
+                <div class="ticket-body">
+                    <div class="ticket-user-info">
+                        <p><strong>Attendee:</strong> <span id="ticketUserName">Your Name</span></p>
+                        <p><strong>Email:</strong> <span id="ticketUserEmail">your@email.com</span></p>
+                        <p><strong>Tickets:</strong> <span id="ticketQuantity">1</span></p>
+                    </div>
+                    <div class="ticket-qr">
+                        <canvas id="qrCode"></canvas>
+                    </div>
+                </div>
+                <div class="ticket-footer">
+                    <p>Present this ticket at the event entrance</p>
+                </div>
+            </div>
+            <button id="downloadTicket" class="btn">Download Ticket</button>
+            <button id="sendToEmail" class="btn btn-secondary">Send to Email</button>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-info animate__animated animate__fadeInLeft">
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Address</h3>
+                    <p>123 Event Street, Tech City</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-phone-alt"></i>
+                    <h3>Phone</h3>
+                    <p>+1 (555) 123-4567</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>info@eventsphere.com</p>
+                </div>
+            </div>
+            <div class="contact-form animate__animated animate__fadeInRight">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-calendar-star"></i>
+                <span>EventSphere</span>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#events">Events</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#register">Register</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 EventSphere. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="fab animate__animated animate__bounceIn animate__delay-2s">
+        <i class="fas fa-ticket-alt"></i>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
